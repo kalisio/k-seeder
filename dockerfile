@@ -1,13 +1,14 @@
 FROM  node:8
 
-MAINTAINER Kalisio <contact@kalisio.com>
+MAINTAINER Kalisio <contact@kalisio.xyz>
 
-ENV DEBUG=
+ARG KRAWLER_BRANCH
+ENV KRAWLER_BRANCH=$KRAWLER_BRANCH
 
-WORKDIR /opt/k-seeder
-COPY . /opt/k-seeder
+RUN git clone https://github.com/kalisio/krawler.git -b $KRAWLER_BRANCH --single-branch && cd krawler && yarn install && yarn link && cd ..
+RUN yarn link @kalisio/krawler
+ENV NODE_PATH=/krawler/node_modules
 
-RUN yarn install
+COPY jobfile.js .
 
-ENTRYPOINT ['/bin/bash']
-
+CMD node ./krawler jobfile.js

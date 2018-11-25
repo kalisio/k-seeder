@@ -1,12 +1,9 @@
 module.exports = {
-  docker: {
-    host: '172.31.41.75'
-  },
-  layer: 'osm-bright',
+  layer: 's2',
   grid: {
-    width: 2,
-    height: 1
+    width: 4,
+    height: 2
   },
   levelMin: 0,
-  levelMax: 6
+  levelMax: 8
 }

@@ -5,7 +5,7 @@ const fs = require('fs')
 const makeDebug = require('debug')
 const _ = require('lodash')
 
-const config = require('./config')
+const config = require('./seed.json')
 
 const debug = makeDebug('krawler:examples')
 
@@ -26,8 +26,8 @@ let generateTasks = () => {
           id: i + '-' + j,
           seed: {
             layer: config.layer,
-            levelMin: config.levelMin,
-            levelMax: config.levelMax,
+            levelMin: config.levels.min,
+            levelMax: config.levels.max,
             bbox: [minx, miny, minx + width, miny + height],
           },
           type: 'noop'
@@ -60,10 +60,10 @@ module.exports = {
           templateFile: 'seed.yaml'
         },
         createDockerContainer: {
-          Image: 'yagajs/mapproxy:1.11-alpine',
+          Image: process.env.MAPPROXY_IMAGE + ':' + process.env.MAPPROXY_TAG,
           Cmd: ['mapproxy-seed', '-f', '/mapproxy/mapproxy.yaml', '-s', '/mapproxy/<%= id %>.yaml'],
           HostConfig: {
-            Binds: ['/home/ubuntu/krawler/examples/seeder/mapproxy:/mapproxy']
+            Binds: [ process.env.SEEDER_MAPPROXY_CONFIG_PATH + ':/mapproxy' ]
           },
           NetworkingConfig: {
             EndpointsConfig: {
@@ -105,16 +105,16 @@ module.exports = {
           }
         ],
         connectDocker: {
-          host: config.docker.host,
+          host: process.env.DOCKER_HOST,
           port: process.env.DOCKER_PORT || 2376,
-          ca: fs.readFileSync('/home/ubuntu/.docker/ca.pem'),
-          cert: fs.readFileSync('/home/ubuntu/.docker/cert.pem'),
-          key: fs.readFileSync('/home/ubuntu/.docker/key.pem'),
+          ca: fs.readFileSync('/certs/ca.pem'),
+          cert: fs.readFileSync('/certs/cert.pem'),
+          key: fs.readFileSync('/certs/pkey.pem'),
           clientPath: 'taskTemplate.client'
         },
         pullDockerImage: {
           clientPath: 'taskTemplate.client',
-          image: 'yagajs/mapproxy:1.11-alpine'
+          image: process.env.MAPPROXY_IMAGE + ':' + process.env.MAPPROXY_TAG
         },
         generateTasks: {}
       },
