@@ -1,6 +1,6 @@
 FROM  node:8
 
-MAINTAINER Kalisio <contact@kalisio.xyz>
+LABEL maintainer="Kalisio <contact@kalisio.xyz>"
 
 ARG KRAWLER_BRANCH
 ENV KRAWLER_BRANCH=$KRAWLER_BRANCH
