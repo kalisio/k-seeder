@@ -12,8 +12,4 @@ notifications:
     on_success: always
     on_failure: always
 script:
-- export VERSION=$(node -p -e "require('./package.json').version")
-- docker build -t kalisio/k-seeder .
-- docker tag kalisio/k-seeder kalisio/k-seeder:$VERSION
-- docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
-- docker push kalisio/k-seeder:$VERSION
+- bash .travis.build.sh
