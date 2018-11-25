@@ -7,7 +7,7 @@ const _ = require('lodash')
 
 const config = require('./config.json')
 
-const debug = makeDebug('krawler:examples')
+const debug = makeDebug('krawler:seeder,krawler:hooks:docker')
 
 
 // Create a custom hook to generate tasks
