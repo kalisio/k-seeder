@@ -105,8 +105,8 @@ module.exports = {
           }
         ],
         connectDocker: {
-          host: process.env.DOCKER_HOST,
-          port: process.env.DOCKER_PORT || 2376,
+          host: process.env.DOCKER_HOST_IP,
+          port: process.env.DOCKER_HOST_PORT || 2376,
           ca: fs.readFileSync('/certs/ca.pem'),
           cert: fs.readFileSync('/certs/cert.pem'),
           key: fs.readFileSync('/certs/pkey.pem'),
