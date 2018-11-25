@@ -5,7 +5,7 @@ const fs = require('fs')
 const makeDebug = require('debug')
 const _ = require('lodash')
 
-const config = require('./seed.json')
+const config = require('./config.json')
 
 const debug = makeDebug('krawler:examples')
 
