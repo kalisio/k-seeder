@@ -95,6 +95,9 @@ module.exports = {
                 'node.role == worker',
                 'node.labels.mapproxy == true'
               ]
+            },
+            RestartPolicy: {
+              Condition: 'none'
             }
           }
         }
