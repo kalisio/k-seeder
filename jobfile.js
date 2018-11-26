@@ -59,32 +59,45 @@ module.exports = {
           templateStore: 'template-store',
           templateFile: 'seed.yaml'
         },
-        createDockerContainer: {
-          Image: process.env.MAPPROXY_IMAGE + ':' + process.env.MAPPROXY_TAG,
-          Cmd: ['mapproxy-seed', '-f', '/mapproxy/mapproxy.yaml', '-s', '/mapproxy/<%= id %>.yaml'],
-          HostConfig: {
-            Binds: [ process.env.SEEDER_MAPPROXY_CONFIG_PATH + ':/mapproxy' ]
-          },
-          NetworkingConfig: {
-            EndpointsConfig: {
-              "kargo": {}
+        createDockerService: {
+          Name: 'kargo-seeder_<%= id %>',
+          TaskTemplate: {
+            ContainerSpec: {
+              Image: 'yagajs/mapproxy:1.11-alpine',
+              Env: [
+                'AWS_ACCESS_KEY_ID=' + process.env.S3_ACCESS_KEY,
+                'AWS_SECRET_ACCESS_KEY=' + process.env.S3_SECRET_ACCESS_KEY
+              ],
+              Mounts: [
+                {
+                  type: 'bind',
+                  Target: '/mapproxy/mapproxy.yaml',
+                  Source: '/home/ubuntu/kargo/.kargo/configs/mapproxy/mapproxy.yaml'
+                },
+                {
+                  type: 'bind',
+                  Target: '/mapproxy/seed.yaml',
+                  Source: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds/<%= id %>.yaml'
+                },
+                {
+                    type: 'bind',
+                    Source: '/mnt/data0/mapproxy_data',
+                    Target: '/mnt/data'
+                  },
+                  {
+                    type: 'bind',
+                    Source: '/mnt/data0/mapproxy_cache',
+                    Target: '/mnt/cache'
+                  }
+              ]
+            },
+            Placement: {
+              Constraints: [
+                'node.role == worker',
+                'node.labels.mapproxy == true'
+              ]
             }
-          },
-          Env: [ 'AWS_ACCESS_KEY_ID=' + process.env.S3_ACCESS_KEY, 
-                 'AWS_SECRET_ACCESS_KEY=' + process.env.S3_SECRET_ACCESS_KEY ]
-        },
-        startSeeder: {
-          hook: 'runDockerContainerCommand',
-          command: 'start'
-        },
-        waitSeeder: {
-          hook: 'runDockerContainerCommand',
-          command: 'wait'
-        },
-        removeSeeder: {
-          hook: 'runDockerContainerCommand',
-          command: 'remove',
-          arguments: { force: true }
+          }
         }
       }
     },
@@ -95,7 +108,7 @@ module.exports = {
             id: 'output-store',
             type: 'fs',
             storePath: 'output-store',
-            options: { path: path.join(__dirname, '/mapproxy') }
+            options: { path: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds' }
           },
           {
             id: 'template-store',
@@ -111,10 +124,6 @@ module.exports = {
           cert: fs.readFileSync('/certs/cert.pem'),
           key: fs.readFileSync('/certs/key.pem'),
           clientPath: 'taskTemplate.client'
-        },
-        pullDockerImage: {
-          clientPath: 'taskTemplate.client',
-          image: process.env.MAPPROXY_IMAGE + ':' + process.env.MAPPROXY_TAG
         },
         generateTasks: {}
       },

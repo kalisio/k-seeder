@@ -9,3 +9,6 @@ else
 	export VERSION=$(node -p -e "require('./package.json').version")
 	export KRAWLER_BRANCH=v$(node -p -e "require('./package.json').peerDependencies['@kalisio/krawler']")
 fi
+
+export MAPPROXY_IMAGE=yagajs/mapproxy
+export MAPPROXY_TAG=1.11-alpine

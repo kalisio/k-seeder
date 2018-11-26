@@ -1,0 +1,3 @@
+FROM yagajs/mapproxy:1.11-alpine
+
+CMD mapproxy-seed -f /mapproxy/mapproxy.yaml -s /mapproxy/seed.yaml
