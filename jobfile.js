@@ -63,7 +63,7 @@ module.exports = {
           Name: 'kargo-seeder_<%= id %>',
           TaskTemplate: {
             ContainerSpec: {
-              Image: 'kalisio/k-seeder:mapproxy-latest',
+              Image: 'kalisio/k-seeder:mapproxy-seed-latest',
               Env: [
                 'AWS_ACCESS_KEY_ID=' + process.env.S3_ACCESS_KEY,
                 'AWS_SECRET_ACCESS_KEY=' + process.env.S3_SECRET_ACCESS_KEY

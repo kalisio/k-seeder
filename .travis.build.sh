@@ -8,7 +8,7 @@ docker build --build-arg KRAWLER_BRANCH=$KRAWLER_BRANCH -f dockerfile -t kalisio
 docker tag kalisio/k-seeder kalisio/k-seeder:$VERSION
 
 # Build the mapproxy-seed image
-docker build -f dockerfile.mapproxy-seed - t kalisio/k-seeder-mapproxy-seed .
+docker build -f dockerfile.mapproxy-seed -t kalisio/k-seeder-mapproxy-seed .
 docker tag kalisio/k-seeder-mapproxy-seed kalisio/k-seeder:mapproxy-seed-$VERSION
 
 # Push the built images to Docker hub
