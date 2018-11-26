@@ -57,10 +57,10 @@ module.exports = {
           hook: 'writeTemplate',
           dataPath: 'result',
           templateStore: 'template-store',
-          templateFile: 'seed.tpl'
+          templateFile: 'seed.yaml'
         },
         createDockerService: {
-          Name: 'kargo-seeder_<%= id %>',
+          Name: 'kargo-seeder_task-<%= id %>',
           TaskTemplate: {
             ContainerSpec: {
               Image: 'kalisio/k-seeder:mapproxy-seed-latest',
@@ -108,7 +108,7 @@ module.exports = {
             id: 'output-store',
             type: 'fs',
             storePath: 'output-store',
-            options: { path: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds' }
+            options: { path: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds/' }
           },
           {
             id: 'template-store',
