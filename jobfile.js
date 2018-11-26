@@ -7,7 +7,7 @@ const _ = require('lodash')
 
 const config = require('./config.json')
 
-const debug = makeDebug('krawler:seeder,krawler:hooks:docker')
+const debug = makeDebug('krawler:seeder')
 
 
 // Create a custom hook to generate tasks
@@ -70,12 +70,12 @@ module.exports = {
               ],
               Mounts: [
                 {
-                  type: 'bind',
+                  type: 'volume',
                   Source: '/home/ubuntu/kargo/.kargo/configs/mapproxy/mapproxy.yaml',
                   Target: '/mapproxy/mapproxy.yaml'
                 },
                 {
-                  type: 'bind',
+                  type: 'volume',
                   Source: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds/<%= id %>.yaml',
                   Target: '/mapproxy/seed.yaml'
                 },
@@ -108,7 +108,7 @@ module.exports = {
             id: 'output-store',
             type: 'fs',
             storePath: 'output-store',
-            options: { path: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds/' }
+            options: { path: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds' }
           },
           {
             id: 'template-store',

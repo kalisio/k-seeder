@@ -5,7 +5,7 @@ LABEL maintainer="Kalisio <contact@kalisio.xyz>"
 ARG KRAWLER_BRANCH
 ENV KRAWLER_BRANCH=$KRAWLER_BRANCH
 
-ENV DEBUG="karwler:seeder"
+ENV DEBUG="krawler:seeder,krawler:hooks:docker"
 
 RUN git clone https://github.com/kalisio/krawler.git -b $KRAWLER_BRANCH --single-branch && cd krawler && yarn install && yarn link && cd ..
 RUN yarn link @kalisio/krawler
