@@ -70,12 +70,12 @@ module.exports = {
               ],
               Mounts: [
                 {
-                  type: 'volume',
+                  type: 'bind',
                   Source: '/home/ubuntu/kargo/.kargo/configs/mapproxy/mapproxy.yaml',
                   Target: '/mapproxy/mapproxy.yaml'
                 },
                 {
-                  type: 'volume',
+                  type: 'bind',
                   Source: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds/<%= id %>.yaml',
                   Target: '/mapproxy/seed.yaml'
                 },
