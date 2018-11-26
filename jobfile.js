@@ -60,7 +60,6 @@ module.exports = {
           templateFile: 'seed.yaml'
         },
         createDockerService: {
-          Name: 'kargo-seeder_task-<%= id %>',
           TaskTemplate: {
             ContainerSpec: {
               Image: 'kalisio/k-seeder:mapproxy-seed-latest',
