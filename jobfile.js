@@ -57,7 +57,7 @@ module.exports = {
           hook: 'writeTemplate',
           dataPath: 'result',
           templateStore: 'template-store',
-          templateFile: 'seed.yaml'
+          templateFile: 'seed.tpl'
         },
         createDockerService: {
           Name: 'kargo-seeder_<%= id %>',
@@ -75,7 +75,7 @@ module.exports = {
                   Target: '/mapproxy/mapproxy.yaml'
                 },
                 {
-                  type: 'volume',
+                  type: 'bind',
                   Source: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds/<%= id %>.yaml',
                   Target: '/mapproxy/seed.yaml'
                 },

@@ -12,5 +12,6 @@ RUN yarn link @kalisio/krawler
 ENV NODE_PATH=/krawler/node_modules
 
 COPY jobfile.js .
+COPY seed.tpl .
 
 CMD node ./krawler jobfile.js
