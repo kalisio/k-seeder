@@ -9,7 +9,7 @@ docker tag kalisio/k-seeder kalisio/k-seeder:$VERSION
 
 # Build the mapproxy-seed image
 docker build -f dockerfile.mapproxy - t kalisio/k-seeder-mapproxy .
-docker tag kalisio/k-seeder kalisio/k-seeder:mapproxy-$VERSION
+docker tag kalisio/k-seeder-mapproxy kalisio/k-seeder:mapproxy-$VERSION
 
 # Push the built images to Docker hub
 docker login -u="$DOCKER_USER" -p="$DOCKER_PASSWORD"
