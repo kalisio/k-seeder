@@ -70,12 +70,12 @@ module.exports = {
               Mounts: [
                 {
                   type: 'bind',
-                  Source: '/home/ubuntu/kargo/.kargo/configs/mapproxy/mapproxy.yaml',
+                  Source: '/configs/mapproxy/mapproxy.yaml',
                   Target: '/mapproxy/mapproxy.yaml'
                 },
                 {
                   type: 'bind',
-                  Source: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds/<%= id %>.yaml',
+                  Source: '/configs/seeder/seeds/<%= id %>.yaml',
                   Target: '/mapproxy/seed.yaml'
                 },
                 {
@@ -110,7 +110,7 @@ module.exports = {
             id: 'output-store',
             type: 'fs',
             storePath: 'output-store',
-            options: { path: '/home/ubuntu/kargo/.kargo/configs/seeder/seeds' }
+            options: { path: '/configs/seeder/seeds' }
           },
           {
             id: 'template-store',
