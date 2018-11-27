@@ -5,7 +5,7 @@ const fs = require('fs')
 const makeDebug = require('debug')
 const _ = require('lodash')
 
-const config = require('./config.json')
+const config = require('/config/config.json')
 
 const debug = makeDebug('krawler:seeder')
 
@@ -70,12 +70,12 @@ module.exports = {
               Mounts: [
                 {
                   type: 'bind',
-                  Source: '/configs/mapproxy/mapproxy.yaml',
+                  Source: '/mapproxy/mapproxy.yaml',
                   Target: '/mapproxy/mapproxy.yaml'
                 },
                 {
                   type: 'bind',
-                  Source: '/configs/seeder/seeds/<%= id %>.yaml',
+                  Source: '/config/seeds/<%= id %>.yaml',
                   Target: '/mapproxy/seed.yaml'
                 },
                 {
@@ -110,7 +110,7 @@ module.exports = {
             id: 'output-store',
             type: 'fs',
             storePath: 'output-store',
-            options: { path: '/configs/seeder/seeds' }
+            options: { path: '/config/seeds' }
           },
           {
             id: 'template-store',
