@@ -70,22 +70,22 @@ module.exports = {
               Mounts: [
                 {
                   type: 'bind',
-                  Source: '/mapproxy/mapproxy.yaml',
+                  Source: path.joinf(process.env.MAPPROXY_CONFIG_PATH, 'mapproxy.yaml'),
                   Target: '/mapproxy/mapproxy.yaml'
                 },
                 {
                   type: 'bind',
-                  Source: '/config/seeds/<%= id %>.yaml',
+                  Source: path.joinf(process.env.SEEDER_CONFIG_PATH, 'seeds', '<%= id %>.yaml'),
                   Target: '/mapproxy/seed.yaml'
                 },
                 {
                     type: 'bind',
-                    Source: '/mnt/data0/mapproxy_data',
+                    Source: process.env.MAPPROXY_DATA_PATH,
                     Target: '/mnt/data'
                   },
                   {
                     type: 'bind',
-                    Source: '/mnt/data0/mapproxy_cache',
+                    Source: process.env.MAPPROXY_CACHE_PATH,
                     Target: '/mnt/cache'
                   }
               ]
