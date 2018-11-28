@@ -61,6 +61,7 @@ module.exports = {
         },
         createDockerService: {
           TaskTemplate: {
+            Name: 'seeder-task-<%= id %>',
             ContainerSpec: {
               Image: 'kalisio/k-seeder:mapproxy-seed-latest',
               Env: [
