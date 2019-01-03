@@ -100,7 +100,8 @@ module.exports = {
             RestartPolicy: {
               Condition: 'none'
             }
-          }
+          },
+          Networks: [ process.env.DOCKER_NETWORK ]
         }
       }
     },
