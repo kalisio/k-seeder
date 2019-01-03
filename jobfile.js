@@ -101,7 +101,9 @@ module.exports = {
               Condition: 'none'
             }
           },
-          Networks: [ process.env.DOCKER_NETWORK ]
+          Networks: [ {
+            name: process.env.DOCKER_NETWORK 
+          }]
         }
       }
     },
