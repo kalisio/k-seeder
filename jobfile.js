@@ -102,7 +102,7 @@ module.exports = {
             }
           },
           Networks: [ {
-            name: process.env.DOCKER_NETWORK 
+            Name: process.env.DOCKER_NETWORK
           }]
         }
       }
